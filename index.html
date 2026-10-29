@@ -1,0 +1,448 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Mensch und Gesellschaft</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:wght@600;700;800&display=swap">
+<style>
+/* Layout: eine Spalte, linksbündig. Start, Runde, Ergebnis. Comic-Optik: 3px Tintenkontur, harter Schatten, Rasterpunkte. */
+:root {
+  --tinte: #1E2A3A;
+  --papier: #EDF2EF;
+  --salbei: #1F7A70;
+  --terrakotta: #B8442B;
+  --senf: #F4B93A;
+  --flieder: #9BADF2;
+  --weiss: #FFFFFF;
+  --salbei-hell: #D3EAE5;
+  --terra-hell: #F5D9D1;
+  --punkt: #D9E0EE;
+  --font-display: 'Lilita One', 'Arial Rounded MT Bold', 'Trebuchet MS', system-ui, sans-serif;
+  --font-body: 'Nunito', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --linie: 3px solid var(--tinte);
+  --schatten: 4px 4px 0 var(--tinte);
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+body {
+  background-color: var(--papier);
+  background-image: radial-gradient(var(--punkt) 1.4px, transparent 1.5px);
+  background-size: 16px 16px;
+  color: var(--tinte);
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.45;
+  padding-block: 20px 56px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+h1, h2, h3 { font-family: var(--font-display); font-weight: 400; letter-spacing: .01em; margin: 0; text-wrap: balance; }
+h1 { font-size: clamp(2.3rem, 9vw, 3.4rem); line-height: 1; }
+h2 { font-size: 1.6rem; line-height: 1.1; }
+p { margin: 0; max-width: 62ch; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--tinte); outline-offset: 3px; box-shadow: 0 0 0 6px var(--senf); }
+
+.badge {
+  align-self: flex-start;
+  background: var(--senf);
+  border: var(--linie);
+  border-radius: 8px;
+  box-shadow: 3px 3px 0 var(--tinte);
+  font-family: var(--font-display);
+  font-size: .95rem;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  transform: rotate(-2deg);
+}
+.btn {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  letter-spacing: .02em;
+  background: var(--senf);
+  border: var(--linie);
+  border-radius: 14px;
+  box-shadow: var(--schatten);
+  padding: 12px 24px;
+  min-height: 54px;
+  cursor: pointer;
+  transition: transform .08s ease, box-shadow .08s ease;
+}
+.btn:active { transform: translate(3px, 3px); box-shadow: 1px 1px 0 var(--tinte); }
+.btn.sek { background: var(--weiss); }
+.btn-row { display: flex; flex-wrap: wrap; gap: 14px; }
+
+/* Start */
+.start-top { display: flex; flex-direction: column; gap: 14px; }
+.lead { font-weight: 700; font-size: 1.1rem; }
+.panel { background: var(--weiss); border: var(--linie); border-radius: 18px; box-shadow: var(--schatten); padding: 18px; display: flex; flex-direction: column; gap: 18px; }
+.group { display: flex; flex-direction: column; gap: 10px; border: 0; margin: 0; padding: 0; min-width: 0; }
+.group legend { font-family: var(--font-display); font-size: 1.1rem; letter-spacing: .03em; padding: 0; margin-bottom: 10px; }
+.chips { display: flex; flex-wrap: wrap; gap: 10px; }
+.chip {
+  font-weight: 800;
+  background: var(--papier);
+  border: var(--linie);
+  border-radius: 12px;
+  padding: 8px 16px;
+  min-height: 48px;
+  cursor: pointer;
+}
+.chip[aria-pressed="true"] { background: var(--flieder); box-shadow: 3px 3px 0 var(--tinte); }
+.chip small { font-weight: 700; opacity: .8; }
+
+/* Runde */
+.topbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.count { font-family: var(--font-display); font-size: 1.25rem; }
+.stats { display: flex; gap: 14px; font-family: var(--font-display); font-size: 1.15rem; }
+.stats span { background: var(--weiss); border: var(--linie); border-radius: 99px; padding: 2px 14px; }
+.bar { height: 16px; border: var(--linie); border-radius: 99px; background: var(--weiss); overflow: hidden; }
+.bar > i { display: block; height: 100%; width: 0; background: var(--flieder); transition: width .3s ease; }
+.card { background: var(--weiss); border: var(--linie); border-radius: 18px; box-shadow: var(--schatten); padding: 20px 20px 22px; display: flex; flex-direction: column; gap: 12px; }
+.tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag { font-size: .8rem; font-weight: 800; letter-spacing: .04em; border: 2px solid var(--tinte); border-radius: 99px; padding: 1px 10px; background: var(--papier); }
+.tag.stand { background: var(--senf); }
+.frage { font-size: 1.4rem; font-weight: 800; line-height: 1.3; text-wrap: pretty; }
+.antworten { display: flex; flex-direction: column; gap: 14px; }
+.ans {
+  display: flex; align-items: flex-start; gap: 14px;
+  width: 100%; text-align: left;
+  background: var(--weiss);
+  border: var(--linie);
+  border-radius: 16px;
+  box-shadow: var(--schatten);
+  padding: 14px 16px;
+  min-height: 64px;
+  font-weight: 700;
+  line-height: 1.35;
+  cursor: pointer;
+  transition: transform .08s ease, box-shadow .08s ease;
+}
+.ans:active:not(:disabled) { transform: translate(3px, 3px); box-shadow: 1px 1px 0 var(--tinte); }
+.ans .let {
+  flex: none; width: 34px; height: 34px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--flieder); border: 2px solid var(--tinte);
+  font-family: var(--font-display); font-size: 1.05rem;
+}
+.ans .txt { flex: 1; min-width: 0; padding-top: 3px; overflow-wrap: anywhere; }
+.ans .mark { flex: none; font-size: 1.4rem; line-height: 1.2; padding-top: 1px; }
+.ans:disabled { cursor: default; color: var(--tinte); }
+.ans.aus { opacity: .55; }
+.ans.zeige { background: var(--salbei-hell); border-color: var(--salbei); box-shadow: 4px 4px 0 var(--salbei); }
+.ans.richtig { background: var(--salbei); color: var(--weiss); }
+.ans.richtig .let { background: var(--weiss); color: var(--tinte); }
+.ans.falsch { background: var(--terrakotta); color: var(--weiss); }
+.ans.falsch .let { background: var(--weiss); color: var(--tinte); }
+.feedback { min-height: 58px; display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; }
+.sprech {
+  position: relative; font-family: var(--font-display); font-size: 1.5rem;
+  background: var(--weiss); border: var(--linie); border-radius: 16px; padding: 6px 18px;
+}
+.sprech::before { content: ""; position: absolute; left: 22px; top: -13px; width: 18px; height: 18px; background: var(--weiss); border-left: var(--linie); border-top: var(--linie); transform: rotate(45deg); }
+.sprech.ok { background: var(--salbei-hell); }
+.sprech.ok::before { background: var(--salbei-hell); }
+.sprech.nein { background: var(--terra-hell); }
+.sprech.nein::before { background: var(--terra-hell); }
+@media (prefers-reduced-motion: no-preference) {
+  .sprech { animation: hop .28s ease-out; }
+  @keyframes hop { from { transform: translateY(8px) scale(.96); opacity: 0; } to { transform: none; opacity: 1; } }
+}
+
+/* Ergebnis */
+.ergebnis { display: flex; flex-direction: column; gap: 14px; }
+.emoji-gross { font-size: 4.5rem; line-height: 1; }
+.zahl { font-family: var(--font-display); font-size: 2.2rem; line-height: 1.1; }
+.review { display: flex; flex-direction: column; gap: 14px; }
+.review-item { background: var(--weiss); border: var(--linie); border-radius: 16px; padding: 14px 16px; display: flex; flex-direction: column; gap: 8px; }
+.review-item .richtig-box { background: var(--salbei-hell); border: 2px solid var(--salbei); border-radius: 10px; padding: 6px 12px; font-weight: 800; }
+
+/* Lehrkräfte */
+details.lehr { background: var(--weiss); border: var(--linie); border-radius: 16px; padding: 12px 16px; }
+details.lehr summary { cursor: pointer; font-family: var(--font-display); font-size: 1.1rem; letter-spacing: .02em; }
+details.lehr .hinweis { margin-block: 12px; font-size: .95rem; }
+.tabelle { overflow-x: auto; max-height: 460px; border: 2px solid var(--tinte); border-radius: 10px; }
+.tabelle table { border-collapse: collapse; width: 100%; font-size: .9rem; }
+.tabelle th, .tabelle td { text-align: left; vertical-align: top; padding: 6px 10px; border-bottom: 1px solid var(--punkt); }
+.tabelle th { position: sticky; top: 0; background: var(--flieder); font-family: var(--font-display); font-weight: 400; }
+.tabelle td.nr { font-variant-numeric: tabular-nums; white-space: nowrap; font-weight: 800; }
+.tabelle td.lsg { font-weight: 800; color: var(--salbei); }
+
+@media (max-width: 480px) {
+  body { font-size: 17px; }
+  .frage { font-size: 1.25rem; }
+  .card { padding: 16px; }
+}
+</style>
+
+<div class="wrap">
+  <section id="start" aria-labelledby="titel">
+    <div class="start-top">
+      <span class="badge">Leben in Deutschland · Stand 07.05.2025</span>
+      <h1 id="titel">Mensch und Gesellschaft</h1>
+      <p class="lead">Wähle pro Frage die eine richtige Antwort. Im Spiel sind die Fragen, die ihr schon bearbeitet habt: <span id="anzahl-text"></span>.</p>
+    </div>
+    <div class="panel" style="margin-top:20px">
+      <fieldset class="group">
+        <legend>Wie viele Fragen?</legend>
+        <div class="chips" id="chips-anzahl"></div>
+      </fieldset>
+      <fieldset class="group">
+        <legend>Reihenfolge der Fragen</legend>
+        <div class="chips" id="chips-reihenfolge"></div>
+      </fieldset>
+      <div class="btn-row"><button class="btn" id="los" type="button">Los geht's</button></div>
+    </div>
+    <details class="lehr" style="margin-top:20px">
+      <summary>Für Lehrkräfte: Lösungsübersicht</summary>
+      <p class="hinweis">Die Nummern entsprechen dem Gesamtfragenkatalog des BAMF. Die Lösungen wurden von Claude festgelegt und nicht aus dem Original übernommen. Bitte vor dem Einsatz im Kurs mit der BAMF-Fassung abgleichen.</p>
+      <div class="tabelle"><table><thead><tr><th>Nr.</th><th>Frage</th><th>Richtige Antwort</th></tr></thead><tbody id="lsg-body"></tbody></table></div>
+    </details>
+  </section>
+
+  <section id="runde" hidden aria-label="Fragerunde">
+    <div class="wrap" style="gap:16px">
+      <div class="topbar">
+        <span class="count" id="zaehler"></span>
+        <div class="stats"><span id="streak" title="Richtige in Folge">🔥 0</span><span id="punkte" title="Richtig beantwortet">⭐ 0</span></div>
+      </div>
+      <div class="bar" role="progressbar" aria-label="Fortschritt" aria-valuemin="0" aria-valuemax="100" id="bar"><i id="bar-fill"></i></div>
+      <article class="card">
+        <div class="tags" id="tags"></div>
+        <p class="frage" id="frage"></p>
+      </article>
+      <div class="antworten" id="antworten"></div>
+      <div class="feedback" aria-live="polite">
+        <div id="fb"></div>
+        <button class="btn" id="weiter" type="button" hidden>Weiter →</button>
+      </div>
+      <div><button class="btn sek" id="abbrechen" type="button" style="font-size:1rem;min-height:44px;padding:8px 16px">Runde beenden</button></div>
+    </div>
+  </section>
+
+  <section id="ende" hidden aria-label="Ergebnis">
+    <div class="ergebnis">
+      <div class="emoji-gross" id="e-emoji"></div>
+      <h2 id="e-titel"></h2>
+      <p class="zahl" id="e-zahl"></p>
+      <div class="btn-row">
+        <button class="btn" id="wiederholen" type="button" hidden>Falsche Fragen wiederholen</button>
+        <button class="btn sek" id="neu" type="button">Neue Runde</button>
+      </div>
+      <div id="review-wrap" hidden>
+        <h3 style="margin:10px 0 14px">Das war noch nicht sicher</h3>
+        <div class="review" id="review"></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+const Q = [{"n": 1, "q": "In Deutschland dürfen Menschen offen etwas gegen die Regierung sagen, weil …", "o": ["hier Religionsfreiheit gilt.", "die Menschen Steuern zahlen.", "die Menschen das Wahlrecht haben.", "hier Meinungsfreiheit gilt."], "a": 3}, {"n": 3, "q": "Deutschland ist ein Rechtsstaat. Was ist damit gemeint?", "o": ["Alle Einwohnerinnen/Einwohner und der Staat müssen sich an die Gesetze halten.", "Der Staat muss sich nicht an die Gesetze halten.", "Nur Deutsche müssen die Gesetze befolgen.", "Die Gerichte machen die Gesetze."], "a": 0}, {"n": 4, "q": "Welches Recht gehört zu den Grundrechten in Deutschland?", "o": ["Waffenbesitz", "Faustrecht", "Meinungsfreiheit", "Selbstjustiz"], "a": 2}, {"n": 5, "q": "Wahlen in Deutschland sind frei. Was bedeutet das?", "o": ["Man darf Geld annehmen, wenn man dafür eine bestimmte Kandidatin/einen bestimmten Kandidaten wählt.", "Nur Personen, die noch nie im Gefängnis waren, dürfen wählen.", "Die Wählerin/der Wähler darf bei der Wahl weder beeinflusst noch zu einer bestimmten Stimmabgabe gezwungen werden und keine Nachteile durch die Wahl haben.", "Alle wahlberechtigten Personen müssen wählen."], "a": 2}, {"n": 6, "q": "Wie heißt die deutsche Verfassung?", "o": ["Volksgesetz", "Bundesgesetz", "Deutsches Gesetz", "Grundgesetz"], "a": 3}, {"n": 7, "q": "Welches Recht gehört zu den Grundrechten, die nach der deutschen Verfassung garantiert werden? Das Recht auf …", "o": ["Glaubens- und Gewissensfreiheit", "Unterhaltung", "Arbeit", "Wohnung"], "a": 0}, {"n": 8, "q": "Was steht nicht im Grundgesetz von Deutschland?", "o": ["Die Würde des Menschen ist unantastbar.", "Alle sollen gleich viel Geld haben.", "Jeder Mensch darf seine Meinung sagen.", "Alle sind vor dem Gesetz gleich."], "a": 1}, {"n": 10, "q": "Was ist mit dem deutschen Grundgesetz vereinbar?", "o": ["die Prügelstrafe", "die Folter", "die Todesstrafe", "die Geldstrafe"], "a": 3}, {"n": 11, "q": "Wie wird die Verfassung der Bundesrepublik Deutschland genannt?", "o": ["Grundgesetz", "Bundesverfassung", "Gesetzbuch", "Verfassungsvertrag"], "a": 0}, {"n": 12, "q": "Eine Partei im Deutschen Bundestag will die Pressefreiheit abschaffen. Ist das möglich?", "o": ["Ja, wenn mehr als die Hälfte der Abgeordneten im Bundestag dafür sind.", "Ja, aber dazu müssen zwei Drittel der Abgeordneten im Bundestag dafür sein.", "Nein, denn die Pressefreiheit ist ein Grundrecht. Sie kann nicht abgeschafft werden.", "Nein, denn nur der Bundesrat kann die Pressefreiheit abschaffen."], "a": 2}, {"n": 13, "q": "Im Parlament steht der Begriff \"Opposition\" für …", "o": ["die regierenden Parteien.", "die Fraktion mit den meisten Abgeordneten.", "alle Parteien, die bei der letzten Wahl die 5%-Hürde erreichen konnten.", "alle Abgeordneten, die nicht zu der Regierungspartei/den Regierungsparteien gehören."], "a": 3}, {"n": 14, "q": "Meinungsfreiheit in Deutschland heißt, dass ich …", "o": ["Passanten auf der Straße beschimpfen darf.", "meine Meinung im Internet äußern kann.", "Nazi-, Hamas- oder Islamischer Staat-Symbole öffentlich tragen darf.", "meine Meinung nur dann äußern darf, solange ich der Regierung nicht widerspreche."], "a": 1}, {"n": 15, "q": "Was verbietet das deutsche Grundgesetz?", "o": ["Militärdienst", "Zwangsarbeit", "freie Berufswahl", "Arbeit im Ausland"], "a": 1}, {"n": 16, "q": "Wann ist die Meinungsfreiheit in Deutschland eingeschränkt?", "o": ["bei der öffentlichen Verbreitung falscher Behauptungen über einzelne Personen", "bei Meinungsäußerungen über die Bundesregierung", "bei Diskussionen über Religionen", "bei Kritik am Staat"], "a": 0}, {"n": 17, "q": "Die deutschen Gesetze verbieten …", "o": ["Meinungsfreiheit der Einwohnerinnen und Einwohner.", "Petitionen der Bürgerinnen und Bürger.", "Versammlungsfreiheit der Einwohnerinnen und Einwohner.", "Ungleichbehandlung der Bürgerinnen und Bürger durch den Staat."], "a": 3}, {"n": 18, "q": "Welches Grundrecht ist in Artikel 1 des Grundgesetzes der Bundesrepublik Deutschland garantiert?", "o": ["die Unantastbarkeit der Menschenwürde", "das Recht auf Leben", "Religionsfreiheit", "Meinungsfreiheit"], "a": 0}, {"n": 19, "q": "Was versteht man unter dem Recht der \"Freizügigkeit\" in Deutschland?", "o": ["Man darf sich seinen Wohnort selbst aussuchen.", "Man kann seinen Beruf wechseln.", "Man darf sich für eine andere Religion entscheiden.", "Man darf sich in der Öffentlichkeit nur leicht bekleidet bewegen."], "a": 0}, {"n": 20, "q": "Eine Partei in Deutschland verfolgt das Ziel, eine Diktatur zu errichten. Sie ist dann …", "o": ["tolerant.", "rechtsstaatlich orientiert.", "gesetzestreu.", "verfassungswidrig."], "a": 3}, {"n": 22, "q": "Was für eine Staatsform hat Deutschland?", "o": ["Monarchie", "Diktatur", "Republik", "Fürstentum"], "a": 2}, {"n": 23, "q": "In Deutschland sind die meisten Erwerbstätigen …", "o": ["in kleinen Familienunternehmen beschäftigt.", "ehrenamtlich für ein Bundesland tätig.", "selbstständig mit einer eigenen Firma tätig.", "bei einer Firma oder Behörde beschäftigt."], "a": 3}, {"n": 24, "q": "Wie viele Bundesländer hat die Bundesrepublik Deutschland?", "o": ["14", "15", "16", "17"], "a": 2}, {"n": 25, "q": "Was ist kein Bundesland der Bundesrepublik Deutschland?", "o": ["Elsass-Lothringen", "Nordrhein-Westfalen", "Mecklenburg-Vorpommern", "Sachsen-Anhalt"], "a": 0}, {"n": 26, "q": "Deutschland ist …", "o": ["eine kommunistische Republik.", "ein demokratischer und sozialer Bundesstaat.", "eine kapitalistische und soziale Monarchie.", "ein sozialer und sozialistischer Bundesstaat."], "a": 1}, {"n": 27, "q": "Deutschland ist …", "o": ["ein sozialistischer Staat.", "ein Bundesstaat.", "eine Diktatur.", "eine Monarchie."], "a": 1}, {"n": 28, "q": "Wer wählt in Deutschland die Abgeordneten zum Bundestag?", "o": ["das Militär", "die Wirtschaft", "das wahlberechtigte Volk", "die Verwaltung"], "a": 2}, {"n": 29, "q": "Welches Tier ist das Wappentier der Bundesrepublik Deutschland?", "o": ["Löwe", "Adler", "Bär", "Pferd"], "a": 1}, {"n": 30, "q": "Was ist kein Merkmal unserer Demokratie?", "o": ["regelmäßige Wahlen", "Pressezensur", "Meinungsfreiheit", "verschiedene Parteien"], "a": 1}, {"n": 32, "q": "Was ist keine staatliche Gewalt in Deutschland?", "o": ["Gesetzgebung", "Regierung", "Presse", "Rechtsprechung"], "a": 2}, {"n": 34, "q": "Was ist Deutschland nicht?", "o": ["eine Demokratie", "ein Rechtsstaat", "eine Monarchie", "ein Sozialstaat"], "a": 2}, {"n": 35, "q": "Womit finanziert der deutsche Staat die Sozialversicherung?", "o": ["Kirchensteuer", "Sozialabgaben", "Spendengeldern", "Vereinsbeiträgen"], "a": 1}, {"n": 36, "q": "Welche Maßnahme schafft in Deutschland soziale Sicherheit?", "o": ["die Krankenversicherung", "die Autoversicherung", "die Gebäudeversicherung", "die Haftpflichtversicherung"], "a": 0}, {"n": 37, "q": "Wie werden die Regierungschefinnen/Regierungschefs der meisten Bundesländer in Deutschland genannt?", "o": ["Erste Ministerin/Erster Minister", "Premierministerin/Premierminister", "Senatorin/Senator", "Ministerpräsidentin/Ministerpräsident"], "a": 3}, {"n": 38, "q": "Die Bundesrepublik Deutschland ist ein demokratischer und sozialer …", "o": ["Staatenverbund.", "Bundesstaat.", "Staatenbund.", "Zentralstaat."], "a": 1}, {"n": 39, "q": "Was hat jedes deutsche Bundesland?", "o": ["eine eigene Außenministerin/einen eigenen Außenminister", "eine eigene Währung", "eine eigene Armee", "eine eigene Regierung"], "a": 3}, {"n": 40, "q": "Mit welchen Worten beginnt die deutsche Nationalhymne?", "o": ["Völker, hört die Signale …", "Einigkeit und Recht und Freiheit …", "Freude schöner Götterfunken …", "Deutschland einig Vaterland …"], "a": 1}, {"n": 41, "q": "Warum gibt es in einer Demokratie mehr als eine Partei?", "o": ["weil dadurch die unterschiedlichen Meinungen der Bürgerinnen und Bürger vertreten werden", "damit Bestechung in der Politik begrenzt wird", "um politische Demonstrationen zu verhindern", "um wirtschaftlichen Wettbewerb anzuregen"], "a": 0}, {"n": 42, "q": "Wer beschließt in Deutschland ein neues Gesetz?", "o": ["die Regierung", "das Parlament", "die Gerichte", "die Polizei"], "a": 1}, {"n": 43, "q": "Wann kann in Deutschland eine Partei verboten werden?", "o": ["wenn ihr Wahlkampf zu teuer ist", "wenn sie gegen die Verfassung kämpft", "wenn sie Kritik am Staatsoberhaupt äußert", "wenn ihr Programm eine neue Richtung vorschlägt"], "a": 1}, {"n": 44, "q": "Wen kann man als Bürgerin/Bürger in Deutschland nicht direkt wählen?", "o": ["Abgeordnete des EU-Parlaments", "Die Bundespräsidentin/den Bundespräsidenten", "Landtagsabgeordnete", "Bundestagsabgeordnete"], "a": 1}, {"n": 45, "q": "Zu welcher Versicherung gehört die Pflegeversicherung?", "o": ["Sozialversicherung", "Unfallversicherung", "Hausratsversicherung", "Haftpflicht- und Feuerversicherung"], "a": 0}, {"n": 46, "q": "Der deutsche Staat hat viele Aufgaben. Welche Aufgabe gehört dazu?", "o": ["Er baut Straßen und Schulen.", "Er verkauft Lebensmittel und Kleidung.", "Er versorgt alle Einwohnerinnen und Einwohner kostenlos mit Zeitungen.", "Er produziert Autos und Busse."], "a": 0}, {"n": 47, "q": "Der deutsche Staat hat viele Aufgaben. Welche Aufgabe gehört nicht dazu?", "o": ["Er bezahlt für alle Staatsangehörigen Urlaubsreisen.", "Er zahlt Kindergeld.", "Er unterstützt Museen.", "Er fördert Sportlerinnen und Sportler."], "a": 0}, {"n": 48, "q": "Welches Organ gehört nicht zu den Verfassungsorganen Deutschlands?", "o": ["der Bundesrat", "die Bundespräsidentin/der Bundespräsident", "die Bürgerversammlung", "die Regierung"], "a": 2}, {"n": 49, "q": "Wer bestimmt in Deutschland die Schulpolitik?", "o": ["die Lehrer und Lehrerinnen", "die Bundesländer", "das Familienministerium", "die Universitäten"], "a": 1}, {"n": 50, "q": "Die Wirtschaftsform in Deutschland nennt man …", "o": ["freie Zentralwirtschaft.", "soziale Marktwirtschaft.", "gelenkte Zentralwirtschaft.", "Planwirtschaft."], "a": 1}, {"n": 51, "q": "Zu einem demokratischen Rechtsstaat gehört es nicht, dass …", "o": ["Menschen sich kritisch über die Regierung äußern können.", "Bürger friedlich demonstrieren gehen dürfen.", "Menschen von einer Privatpolizei ohne Grund verhaftet werden.", "jemand ein Verbrechen begeht und deshalb verhaftet wird."], "a": 2}, {"n": 52, "q": "Was bedeutet \"Volkssouveränität\"? Alle Staatsgewalt geht vom ...", "o": ["Volke aus.", "Bundestag aus.", "preußischen König aus.", "Bundesverfassungsgericht aus."], "a": 0}, {"n": 53, "q": "Was bedeutet \"Rechtsstaat\" in Deutschland?", "o": ["Der Staat hat Recht.", "Es gibt nur rechte Parteien.", "Die Bürgerinnen und Bürger entscheiden über Gesetze.", "Der Staat muss die Gesetze einhalten."], "a": 3}, {"n": 54, "q": "Was ist keine staatliche Gewalt in Deutschland?", "o": ["Legislative", "Judikative", "Exekutive", "Direktive"], "a": 3}, {"n": 56, "q": "Welches Amt gehört in Deutschland zur Gemeindeverwaltung?", "o": ["Pfarramt", "Ordnungsamt", "Finanzamt", "Auswärtiges Amt"], "a": 1}, {"n": 57, "q": "Wer wird meistens zur Präsidentin/zum Präsidenten des Deutschen Bundestages gewählt?", "o": ["die/der älteste Abgeordnete im Parlament", "die Ministerpräsidentin/der Ministerpräsident des größten Bundeslandes", "eine ehemalige Bundeskanzlerin/ein ehemaliger Bundeskanzler", "eine Abgeordnete/ein Abgeordneter der stärksten Fraktion"], "a": 3}, {"n": 58, "q": "Wer ernennt in Deutschland die Ministerinnen/die Minister der Bundesregierung?", "o": ["die Präsidentin/der Präsident des Bundesverfassungsgerichtes", "die Bundespräsidentin/der Bundespräsident", "die Bundesratspräsidentin/der Bundesratspräsident", "die Bundestagspräsidentin/der Bundestagspräsident"], "a": 1}, {"n": 59, "q": "Vor wie vielen Jahren gab es erstmals eine jüdische Gemeinde auf dem Gebiet des heutigen Deutschlands?", "o": ["vor etwa 300 Jahren", "vor etwa 700 Jahren", "vor etwa 1150 Jahren", "vor etwa 1700 Jahren"], "a": 3}, {"n": 60, "q": "In Deutschland gehören der Bundestag und der Bundesrat zur …", "o": ["Exekutive.", "Legislative.", "Direktive.", "Judikative."], "a": 1}, {"n": 61, "q": "Was bedeutet \"Volkssouveränität\"?", "o": ["Die Königin/der König herrscht über das Volk.", "Das Bundesverfassungsgericht steht über der Verfassung.", "Die Interessenverbände üben die Souveränität zusammen mit der Regierung aus.", "Die Staatsgewalt geht vom Volke aus."], "a": 3}, {"n": 62, "q": "Wenn das Parlament eines deutschen Bundeslandes gewählt wird, nennt man das …", "o": ["Kommunalwahl", "Landtagswahl", "Europawahl", "Bundestagswahl"], "a": 1}, {"n": 63, "q": "Was gehört in Deutschland nicht zur Exekutive?", "o": ["die Polizei", "die Gerichte", "das Finanzamt", "die Ministerien"], "a": 1}, {"n": 64, "q": "Die Bundesrepublik Deutschland ist heute gegliedert in …", "o": ["vier Besatzungszonen.", "einen Oststaat und einen Weststaat.", "16 Kantone.", "Bund, Länder und Kommunen."], "a": 3}, {"n": 65, "q": "Es gehört nicht zu den Aufgaben des Deutschen Bundestages, …", "o": ["Gesetze zu entwerfen.", "die Bundesregierung zu kontrollieren.", "die Bundeskanzlerin/den Bundeskanzler zu wählen.", "das Bundeskabinett zu bilden."], "a": 3}, {"n": 66, "q": "Welche Städte haben die größten jüdischen Gemeinden in Deutschland?", "o": ["Berlin und München", "Hamburg und Essen", "Nürnberg und Stuttgart", "Worms und Speyer"], "a": 0}, {"n": 67, "q": "Was ist in Deutschland vor allem eine Aufgabe der Bundesländer?", "o": ["Verteidigungspolitik", "Außenpolitik", "Wirtschaftspolitik", "Schulpolitik"], "a": 3}, {"n": 68, "q": "Warum kontrolliert der Staat in Deutschland das Schulwesen?", "o": ["weil es in Deutschland nur staatliche Schulen gibt", "weil alle Schülerinnen und Schüler einen Schulabschluss haben müssen", "weil es in den Bundesländern verschiedene Schulen gibt", "weil es nach dem Grundgesetz seine Aufgabe ist"], "a": 3}, {"n": 69, "q": "Die Bundesrepublik Deutschland hat einen dreistufigen Verwaltungsaufbau. Wie heißt die unterste politische Stufe?", "o": ["Stadträte", "Landräte", "Gemeinden", "Bezirksämter"], "a": 2}, {"n": 70, "q": "Der deutsche Bundespräsident Gustav Heinemann gibt Helmut Schmidt 1974 die Ernennungsurkunde zum deutschen Bundeskanzler. Was gehört zu den Aufgaben der deutschen Bundespräsidentin/des deutschen Bundespräsidenten?", "o": ["Sie/Er führt die Regierungsgeschäfte.", "Sie/Er kontrolliert die Regierungspartei.", "Sie/Er wählt die Ministerinnen/Minister aus.", "Sie/Er schlägt die Kanzlerin/den Kanzler zur Wahl vor."], "a": 3}, {"n": 71, "q": "Wo hält sich die deutsche Bundeskanzlerin/der deutsche Bundeskanzler am häufigsten auf? Am häufigsten ist sie/er …", "o": ["in Bonn, weil sich dort das Bundeskanzleramt und der Bundestag befinden.", "auf Schloss Meseberg, dem Gästehaus der Bundesregierung, um Staatsgäste zu empfangen.", "auf Schloss Bellevue, dem Amtssitz der Bundespräsidentin/des Bundespräsidenten, um Staatsgäste zu empfangen.", "in Berlin, weil sich dort das Bundeskanzleramt und der Bundestag befinden."], "a": 3}, {"n": 72, "q": "Wie heißt die jetzige Bundeskanzlerin/der jetzige Bundeskanzler von Deutschland?", "o": ["Gerhard Schröder", "Angela Merkel", "Ursula von der Leyen", "Friedrich Merz"], "a": 3}, {"n": 73, "q": "Die beiden größten Fraktionen im Deutschen Bundestag heißen zurzeit …", "o": ["CDU/CSU und AfD.", "Die Linke und Bündnis 90/Die Grünen.", "Bündnis 90/Die Grünen und SPD.", "Die Linke und CDU/CSU."], "a": 0}, {"n": 74, "q": "Wie heißt das Parlament für ganz Deutschland?", "o": ["Bundesversammlung", "Volkskammer", "Bundestag", "Bundesgerichtshof"], "a": 2}, {"n": 75, "q": "Wie heißt Deutschlands heutiges Staatsoberhaupt?", "o": ["Frank-Walter Steinmeier", "Bärbel Bas", "Bodo Ramelow", "Joachim Gauck"], "a": 0}, {"n": 76, "q": "Was bedeutet die Abkürzung CDU in Deutschland?", "o": ["Christliche Deutsche Union", "Club Deutscher Unternehmer", "Christlicher Deutscher Umweltschutz", "Christlich Demokratische Union"], "a": 3}, {"n": 77, "q": "Was ist die Bundeswehr?", "o": ["die deutsche Polizei", "ein deutscher Hafen", "eine deutsche Bürgerinitiative", "die deutsche Armee"], "a": 3}, {"n": 78, "q": "Was bedeutet die Abkürzung SPD?", "o": ["Sozialistische Partei Deutschlands", "Sozialpolitische Partei Deutschlands", "Sozialdemokratische Partei Deutschlands", "Sozialgerechte Partei Deutschlands"], "a": 2}, {"n": 79, "q": "Was bedeutet die Abkürzung FDP in Deutschland?", "o": ["Friedliche Demonstrative Partei", "Freie Deutschland Partei", "Führende Demokratische Partei", "Freie Demokratische Partei"], "a": 3}, {"n": 80, "q": "Welches Gericht in Deutschland ist zuständig für die Auslegung des Grundgesetzes?", "o": ["Oberlandesgericht", "Amtsgericht", "Bundesverfassungsgericht", "Verwaltungsgericht"], "a": 2}, {"n": 81, "q": "Wer wählt die Bundeskanzlerin/den Bundeskanzler in Deutschland?", "o": ["der Bundesrat", "die Bundesversammlung", "das Volk", "der Bundestag"], "a": 3}, {"n": 82, "q": "Wer leitet das deutsche Bundeskabinett?", "o": ["die Bundestagspräsidentin/der Bundestagspräsident", "die Bundespräsidentin/der Bundespräsident", "die Bundesratspräsidentin/der Bundesratspräsident", "die Bundeskanzlerin/der Bundeskanzler"], "a": 3}, {"n": 83, "q": "Wer wählt die deutsche Bundeskanzlerin/den deutschen Bundeskanzler?", "o": ["das Volk", "die Bundesversammlung", "der Bundestag", "die Bundesregierung"], "a": 2}, {"n": 84, "q": "Welche Hauptaufgabe hat die deutsche Bundespräsidentin/der deutsche Bundespräsident? Sie/Er …", "o": ["regiert das Land.", "entwirft die Gesetze.", "repräsentiert das Land.", "überwacht die Einhaltung der Gesetze."], "a": 2}, {"n": 85, "q": "Wer bildet den deutschen Bundesrat?", "o": ["die Abgeordneten des Bundestages", "die Ministerinnen und Minister der Bundesregierung", "die Regierungsvertreter der Bundesländer", "die Parteimitglieder"], "a": 2}, {"n": 86, "q": "Wer wählt in Deutschland die Bundespräsidentin/den Bundespräsidenten?", "o": ["die Bundesversammlung", "der Bundesrat", "das Bundesparlament", "das Bundesverfassungsgericht"], "a": 0}, {"n": 87, "q": "Wer ist das Staatsoberhaupt der Bundesrepublik Deutschland?", "o": ["die Bundeskanzlerin/der Bundeskanzler", "die Bundespräsidentin/der Bundespräsident", "die Bundesratspräsidentin/der Bundesratspräsident", "die Bundestagspräsidentin/der Bundestagspräsident"], "a": 1}, {"n": 88, "q": "Die parlamentarische Opposition im Deutschen Bundestag …", "o": ["kontrolliert die Regierung.", "entscheidet, wer Bundesministerin/Bundesminister wird.", "bestimmt, wer im Bundesrat sitzt.", "schlägt die Regierungschefinnen/Regierungschefs der Länder vor."], "a": 0}, {"n": 89, "q": "Wie nennt man in Deutschland die Vereinigung von Abgeordneten einer Partei im Parlament?", "o": ["Verband", "Ältestenrat", "Fraktion", "Opposition"], "a": 2}, {"n": 90, "q": "Die deutschen Bundesländer wirken an der Gesetzgebung des Bundes mit durch …", "o": ["den Bundesrat.", "die Bundesversammlung.", "den Bundestag.", "die Bundesregierung."], "a": 0}, {"n": 91, "q": "In Deutschland kann ein Regierungswechsel in einem Bundesland Auswirkungen auf die Bundespolitik haben. Das Regieren wird …", "o": ["schwieriger, wenn sich dadurch die Mehrheit im Bundestag ändert.", "leichter, wenn dadurch neue Parteien in den Bundesrat kommen.", "schwieriger, wenn dadurch die Mehrheit im Bundesrat verändert wird.", "leichter, wenn es sich um ein reiches Bundesland handelt."], "a": 2}, {"n": 92, "q": "Was bedeutet die Abkürzung CSU in Deutschland?", "o": ["Christlich Sichere Union", "Christlich Süddeutsche Union", "Christlich Sozialer Unternehmerverband", "Christlich Soziale Union"], "a": 3}, {"n": 93, "q": "Je mehr \"Zweitstimmen\" eine Partei bei einer Bundestagswahl bekommt, desto …", "o": ["weniger Erststimmen kann sie haben.", "mehr Direktkandidaten der Partei ziehen ins Parlament ein.", "größer ist das Risiko, eine Koalition bilden zu müssen.", "mehr Sitze erhält die Partei im Parlament."], "a": 3}, {"n": 94, "q": "Ab welchem Alter darf man in Deutschland an der Wahl zum Deutschen Bundestag teilnehmen?", "o": ["16", "18", "21", "23"], "a": 1}, {"n": 95, "q": "Was gilt für die meisten Kinder in Deutschland?", "o": ["Wahlpflicht", "Schulpflicht", "Schweigepflicht", "Religionspflicht"], "a": 1}, {"n": 96, "q": "Wie kann jemand, der den Holocaust leugnet, bestraft werden?", "o": ["Kürzung sozialer Leistungen", "bis zu 100 Sozialstunden", "gar nicht, Holocaustleugnung ist erlaubt", "mit Freiheitsstrafe bis zu fünf Jahren oder mit Geldstrafe"], "a": 3}, {"n": 97, "q": "Was bezahlt man in Deutschland automatisch, wenn man fest angestellt ist?", "o": ["Sozialversicherung", "Sozialhilfe", "Kindergeld", "Wohngeld"], "a": 0}, {"n": 98, "q": "Wenn Abgeordnete im Deutschen Bundestag ihre Fraktion wechseln, …", "o": ["dürfen sie nicht mehr an den Sitzungen des Parlaments teilnehmen.", "kann die Regierung ihre Mehrheit verlieren.", "muss die Bundespräsidentin/der Bundespräsident zuvor ihr/sein Einverständnis geben.", "dürfen die Wählerinnen/Wähler dieser Abgeordneten noch einmal wählen."], "a": 1}, {"n": 99, "q": "Wer bezahlt in Deutschland die Sozialversicherungen?", "o": ["Arbeitgeberinnen/Arbeitgeber und Arbeitnehmerinnen/Arbeitnehmer", "nur Arbeitnehmerinnen/Arbeitnehmer", "alle Staatsangehörigen", "nur Arbeitgeberinnen/Arbeitgeber"], "a": 0}, {"n": 100, "q": "Was gehört nicht zur gesetzlichen Sozialversicherung?", "o": ["die Lebensversicherung", "die gesetzliche Rentenversicherung", "die Arbeitslosenversicherung", "die Pflegeversicherung"], "a": 0}, {"n": 101, "q": "Gewerkschaften sind Interessenverbände der …", "o": ["Jugendlichen.", "Arbeitnehmerinnen und Arbeitnehmer.", "Rentnerinnen und Rentner.", "Arbeitgeberinnen und Arbeitgeber."], "a": 1}, {"n": 102, "q": "Womit kann man in der Bundesrepublik Deutschland geehrt werden, wenn man auf politischem, wirtschaftlichem, kulturellem, geistigem oder sozialem Gebiet eine besondere Leistung erbracht hat? Mit dem …", "o": ["Bundesverdienstkreuz", "Bundesadler", "Vaterländischen Verdienstorden", "Ehrentitel \"Held der Deutschen Demokratischen Republik\""], "a": 0}, {"n": 103, "q": "Was wird in Deutschland als \"Ampelkoalition\" bezeichnet? Die Zusammenarbeit …", "o": ["der Bundestagsfraktionen von CDU und CSU", "von SPD, FDP und Bündnis 90/Die Grünen in einer Regierung", "von CSU, Die LINKE und Bündnis 90/Die Grünen in einer Regierung", "der Bundestagsfraktionen von CDU und SPD"], "a": 1}, {"n": 104, "q": "Eine Frau in Deutschland verliert ihre Arbeit. Was darf nicht der Grund für diese Entlassung sein?", "o": ["Die Frau ist lange krank und arbeitsunfähig.", "Die Frau kam oft zu spät zur Arbeit.", "Die Frau erledigt private Sachen während der Arbeitszeit.", "Die Frau bekommt ein Kind und ihr Chef weiß das."], "a": 3}, {"n": 105, "q": "Was ist eine Aufgabe von Wahlhelferinnen/Wahlhelfern in Deutschland?", "o": ["Sie helfen alten Menschen bei der Stimmabgabe in der Wahlkabine.", "Sie schreiben die Wahlbenachrichtigungen vor der Wahl.", "Sie geben Zwischenergebnisse an die Medien weiter.", "Sie zählen die Stimmen nach dem Ende der Wahl."], "a": 3}, {"n": 106, "q": "In Deutschland helfen ehrenamtliche Wahlhelferinnen und Wahlhelfer bei den Wahlen. Was ist eine Aufgabe von Wahlhelferinnen/Wahlhelfern?", "o": ["Sie helfen Kindern und alten Menschen beim Wählen.", "Sie schreiben Karten und Briefe mit der Angabe des Wahllokals.", "Sie geben Zwischenergebnisse an Journalisten weiter.", "Sie zählen die Stimmen nach dem Ende der Wahl."], "a": 3}, {"n": 107, "q": "Für wie viele Jahre wird der Bundestag in Deutschland gewählt?", "o": ["2 Jahre", "4 Jahre", "6 Jahre", "8 Jahre"], "a": 1}, {"n": 108, "q": "Bei einer Bundestagswahl in Deutschland darf jede/jeder wählen, die/der …", "o": ["in der Bundesrepublik Deutschland wohnt und wählen möchte.", "Bürgerin/Bürger der Bundesrepublik Deutschland ist und mindestens 18 Jahre alt ist.", "seit mindestens 3 Jahren in der Bundesrepublik Deutschland lebt.", "Bürgerin/Bürger der Bundesrepublik Deutschland ist und mindestens 21 Jahre alt ist."], "a": 1}, {"n": 109, "q": "Wie oft gibt es normalerweise Bundestagswahlen in Deutschland?", "o": ["alle drei Jahre", "alle vier Jahre", "alle fünf Jahre", "alle sechs Jahre"], "a": 1}, {"n": 110, "q": "Für wie viele Jahre wird der Bundestag in Deutschland gewählt?", "o": ["2 Jahre", "3 Jahre", "4 Jahre", "5 Jahre"], "a": 2}, {"n": 111, "q": "Welche Handlungen mit Bezug auf den Staat Israel sind in Deutschland verboten?", "o": ["die Politik Israels öffentlich kritisieren", "das Aufhängen einer israelischen Flagge auf dem Privatgrundstück", "eine Diskussion über die Politik Israels", "der öffentliche Aufruf zur Vernichtung Israels"], "a": 3}, {"n": 112, "q": "Die Wahlen in Deutschland sind …", "o": ["speziell.", "geheim.", "berufsbezogen.", "geschlechtsabhängig."], "a": 1}, {"n": 113, "q": "Wahlen in Deutschland gewinnt die Partei, die …", "o": ["die meisten Stimmen bekommt.", "die meisten Männer mehrheitlich gewählt haben.", "die meisten Stimmen bei den Arbeiterinnen/Arbeitern bekommen hat.", "die meisten Erststimmen für ihre Kanzlerkandidatin/ihren Kanzlerkandidaten erhalten hat."], "a": 0}, {"n": 114, "q": "An demokratischen Wahlen in Deutschland teilzunehmen ist …", "o": ["eine Pflicht.", "ein Recht.", "ein Zwang.", "eine Last."], "a": 1}, {"n": 115, "q": "Was bedeutet \"aktives Wahlrecht\" in Deutschland?", "o": ["Man kann gewählt werden.", "Man muss wählen gehen.", "Man kann wählen.", "Man muss zur Auszählung der Stimmen gehen."], "a": 2}, {"n": 116, "q": "Wenn Sie bei einer Bundestagswahl in Deutschland wählen dürfen, heißt das …", "o": ["aktive Wahlkampagne.", "aktives Wahlverfahren.", "aktiver Wahlkampf.", "aktives Wahlrecht."], "a": 3}, {"n": 117, "q": "Wie viel Prozent der Zweitstimmen müssen Parteien mindestens bekommen, um in den Deutschen Bundestag gewählt zu werden?", "o": ["3%", "4%", "5%", "6%"], "a": 2}, {"n": 118, "q": "Wer darf bei den rund 40 jüdischen Makkabi-Sportvereinen Mitglied werden?", "o": ["nur Deutsche", "nur Israelis", "nur religiöse Menschen", "alle Menschen"], "a": 3}, {"n": 119, "q": "Wahlen in Deutschland sind frei. Was bedeutet das?", "o": ["Alle verurteilten Straftäterinnen/Straftäter dürfen nicht wählen.", "Wenn ich wählen gehen möchte, muss meine Arbeitgeberin/mein Arbeitgeber mir frei geben.", "Jede Person kann ohne Zwang entscheiden, ob sie wählen möchte und wen sie wählen möchte.", "Ich kann frei entscheiden, wo ich wählen gehen möchte."], "a": 2}, {"n": 120, "q": "Das Wahlsystem in Deutschland ist ein …", "o": ["Zensuswahlrecht.", "Dreiklassenwahlrecht.", "Mehrheits- und Verhältniswahlrecht.", "allgemeines Männerwahlrecht."], "a": 2}, {"n": 121, "q": "Eine Partei möchte in den Deutschen Bundestag. Sie muss aber einen Mindestanteil an Wählerstimmen haben. Das heißt …", "o": ["5%-Hürde.", "Zulassungsgrenze.", "Basiswert.", "Richtlinie."], "a": 0}, {"n": 122, "q": "Welchem Grundsatz unterliegen Wahlen in Deutschland? Wahlen in Deutschland sind …", "o": ["frei, gleich, geheim.", "offen, sicher, frei.", "geschlossen, gleich, sicher.", "sicher, offen, freiwillig."], "a": 0}, {"n": 123, "q": "Was ist in Deutschland die \"5%-Hürde\"?", "o": ["Abstimmungsregelung im Bundestag für kleine Parteien", "Anwesenheitskontrolle im Bundestag für Abstimmungen", "Mindestanteil an Wählerstimmen, um ins Parlament zu kommen", "Anwesenheitskontrolle im Bundesrat für Abstimmungen"], "a": 2}, {"n": 124, "q": "Die Bundestagswahl in Deutschland ist die Wahl …", "o": ["der Bundeskanzlerin/des Bundeskanzlers.", "der Parlamente der Länder.", "des Parlaments für Deutschland.", "der Bundespräsidentin/des Bundespräsidenten."], "a": 2}, {"n": 125, "q": "In einer Demokratie ist eine Funktion von regelmäßigen Wahlen, …", "o": ["die Bürgerinnen und Bürger zu zwingen, ihre Stimme abzugeben.", "nach dem Willen der Wählermehrheit den Wechsel der Regierung zu ermöglichen.", "im Land bestehende Gesetze beizubehalten.", "den Armen mehr Macht zu geben."], "a": 1}, {"n": 126, "q": "Was bekommen wahlberechtigte Bürgerinnen und Bürger in Deutschland vor einer Wahl?", "o": ["eine Wahlbenachrichtigung von der Gemeinde", "eine Wahlerlaubnis von der Bundespräsidentin/von dem Bundespräsidenten", "eine Benachrichtigung von der Bundesversammlung", "eine Benachrichtigung vom Pfarramt"], "a": 0}, {"n": 127, "q": "Warum gibt es die 5%-Hürde im Wahlgesetz der Bundesrepublik Deutschland? Es gibt sie, weil …", "o": ["die Programme von vielen kleinen Parteien viele Gemeinsamkeiten haben.", "die Bürgerinnen und Bürger bei vielen kleinen Parteien die Orientierung verlieren können.", "viele kleine Parteien die Regierungsbildung erschweren.", "die kleinen Parteien nicht so viel Geld haben, um die Politikerinnen und Politiker zu bezahlen."], "a": 2}, {"n": 128, "q": "Parlamentsmitglieder, die von den Bürgerinnen und Bürgern gewählt werden, nennt man …", "o": ["Abgeordnete.", "Kanzlerinnen/Kanzler.", "Botschafterinnen/Botschafter.", "Ministerpräsidentinnen/Ministerpräsidenten."], "a": 0}, {"n": 129, "q": "Vom Volk gewählt wird in Deutschland …", "o": ["die Bundeskanzlerin/der Bundeskanzler.", "die Ministerpräsidentin/der Ministerpräsident eines Bundeslandes.", "der Bundestag.", "die Bundespräsidentin/der Bundespräsident."], "a": 2}, {"n": 131, "q": "In Deutschland ist eine Bürgermeisterin/ein Bürgermeister …", "o": ["die Leiterin/der Leiter einer Schule.", "die Chefin/der Chef einer Bank.", "das Oberhaupt einer Gemeinde.", "die/der Vorsitzende einer Partei."], "a": 2}, {"n": 132, "q": "Viele Menschen in Deutschland arbeiten in ihrer Freizeit ehrenamtlich. Was bedeutet das?", "o": ["Sie arbeiten als Soldatinnen/Soldaten.", "Sie arbeiten freiwillig und unbezahlt in Vereinen und Verbänden.", "Sie arbeiten in der Bundesregierung.", "Sie arbeiten in einem Krankenhaus und verdienen dabei Geld."], "a": 1}, {"n": 133, "q": "Was ist bei Bundestags- und Landtagswahlen in Deutschland erlaubt?", "o": ["Der Ehemann wählt für seine Frau mit.", "Man kann durch Briefwahl seine Stimme abgeben.", "Man kann am Wahltag telefonisch seine Stimme abgeben.", "Kinder ab dem Alter von 14 Jahren dürfen wählen."], "a": 1}, {"n": 134, "q": "Man will die Buslinie abschaffen, mit der Sie immer zur Arbeit fahren. Was können Sie machen, um die Buslinie zu erhalten?", "o": ["Ich beteilige mich an einer Bürgerinitiative für die Erhaltung der Buslinie oder gründe selber eine Initiative.", "Ich werde Mitglied in einem Sportverein und trainiere Radfahren.", "Ich wende mich an das Finanzamt, weil ich als Steuerzahlerin/Steuerzahler ein Recht auf die Buslinie habe.", "Ich schreibe einen Brief an das Forstamt der Gemeinde."], "a": 0}, {"n": 135, "q": "Wen vertreten die Gewerkschaften in Deutschland?", "o": ["große Unternehmen", "kleine Unternehmen", "Selbstständige", "Arbeitnehmerinnen und Arbeitnehmer"], "a": 3}, {"n": 136, "q": "Sie gehen in Deutschland zum Arbeitsgericht bei …", "o": ["falscher Nebenkostenabrechnung.", "ungerechtfertigter Kündigung durch Ihre Chefin/Ihren Chef.", "Problemen mit den Nachbarinnen/Nachbarn.", "Schwierigkeiten nach einem Verkehrsunfall."], "a": 1}, {"n": 137, "q": "Welches Gericht ist in Deutschland bei Konflikten in der Arbeitswelt zuständig?", "o": ["das Familiengericht", "das Strafgericht", "das Arbeitsgericht", "das Amtsgericht"], "a": 2}, {"n": 138, "q": "Was kann ich in Deutschland machen, wenn mir meine Arbeitgeberin/mein Arbeitgeber zu Unrecht gekündigt hat?", "o": ["weiterarbeiten und freundlich zur Chefin/zum Chef sein", "ein Mahnverfahren gegen die Arbeitgeberin/den Arbeitgeber führen", "Kündigungsschutzklage erheben", "die Arbeitgeberin/den Arbeitgeber bei der Polizei anzeigen"], "a": 2}, {"n": 139, "q": "Wann kommt es in Deutschland zu einem Prozess vor Gericht? Wenn jemand …", "o": ["zu einer anderen Religion übertritt.", "eine Straftat begangen hat und angeklagt wird.", "eine andere Meinung als die der Regierung vertritt.", "sein Auto falsch geparkt hat und es abgeschleppt wird."], "a": 1}, {"n": 140, "q": "Was macht eine Schöffin/ein Schöffe in Deutschland? Sie/Er …", "o": ["entscheidet mit Richterinnen/Richtern über Schuld und Strafe.", "gibt Bürgerinnen/Bürgern rechtlichen Rat.", "stellt Urkunden aus.", "verteidigt die Angeklagte/den Angeklagten."], "a": 0}, {"n": 141, "q": "Wer berät in Deutschland Personen bei Rechtsfragen und vertritt sie vor Gericht?", "o": ["eine Rechtsanwältin/ein Rechtsanwalt", "eine Richterin/ein Richter", "eine Schöffin/ein Schöffe", "eine Staatsanwältin/ein Staatsanwalt"], "a": 0}, {"n": 142, "q": "Was ist die Hauptaufgabe einer Richterin/eines Richters in Deutschland? Eine Richterin/ein Richter …", "o": ["vertritt Bürgerinnen und Bürger vor einem Gericht.", "arbeitet an einem Gericht und spricht Urteile.", "ändert Gesetze.", "betreut Jugendliche vor Gericht."], "a": 1}, {"n": 143, "q": "Eine Richterin/ein Richter in Deutschland gehört zur …", "o": ["Judikative.", "Exekutive.", "Operative.", "Legislative."], "a": 0}, {"n": 144, "q": "Eine Richterin/ein Richter gehört in Deutschland zur …", "o": ["vollziehenden Gewalt.", "rechtsprechenden Gewalt.", "planenden Gewalt.", "gesetzgebenden Gewalt."], "a": 1}, {"n": 145, "q": "In Deutschland wird die Staatsgewalt geteilt. Für welche Staatsgewalt arbeitet eine Richterin/ein Richter? Für die …", "o": ["Judikative", "Exekutive", "Presse", "Legislative"], "a": 0}, {"n": 146, "q": "Wie nennt man in Deutschland ein Verfahren vor einem Gericht?", "o": ["Programm", "Prozedur", "Protokoll", "Prozess"], "a": 3}, {"n": 147, "q": "Was ist die Arbeit einer Richterin/eines Richters in Deutschland?", "o": ["Deutschland regieren", "Recht sprechen", "Pläne erstellen", "Gesetze erlassen"], "a": 1}, {"n": 148, "q": "Was ist eine Aufgabe der Polizei in Deutschland?", "o": ["das Land zu verteidigen", "die Bürgerinnen und Bürger abzuhören", "die Gesetze zu beschließen", "die Einhaltung von Gesetzen zu überwachen"], "a": 3}, {"n": 149, "q": "Was ist ein Beispiel für antisemitisches Verhalten?", "o": ["ein jüdisches Fest besuchen", "die israelische Regierung kritisieren", "den Holocaust leugnen", "gegen Juden Fußball spielen."], "a": 2}, {"n": 150, "q": "Eine Gerichtsschöffin/ein Gerichtsschöffe in Deutschland ist …", "o": ["die Stellvertreterin/der Stellvertreter des Stadtoberhaupts.", "eine ehrenamtliche Richterin/ein ehrenamtlicher Richter.", "ein Mitglied eines Gemeinderats.", "eine Person, die Jura studiert hat."], "a": 1}, {"n": 171, "q": "Soziale Marktwirtschaft bedeutet, die Wirtschaft …", "o": ["steuert sich allein nach Angebot und Nachfrage.", "wird vom Staat geplant und gesteuert, Angebot und Nachfrage werden nicht berücksichtigt.", "richtet sich nach der Nachfrage im Ausland.", "richtet sich nach Angebot und Nachfrage, aber der Staat sorgt für einen sozialen Ausgleich."], "a": 3}, {"n": 216, "q": "Welches Symbol ist im Plenarsaal des Deutschen Bundestages zu sehen?", "o": ["der Bundesadler", "die Fahne der Stadt Berlin", "der Reichsadler", "die Reichskrone"], "a": 0}, {"n": 222, "q": "Welches Land ist ein Nachbarland von Deutschland?", "o": ["Ungarn", "Portugal", "Spanien", "Schweiz"], "a": 3}, {"n": 223, "q": "Welches Land ist ein Nachbarland von Deutschland?", "o": ["Rumänien", "Bulgarien", "Polen", "Griechenland"], "a": 2}, {"n": 225, "q": "In welchem anderen Land gibt es eine große deutschsprachige Bevölkerung?", "o": ["Tschechien", "Norwegen", "Spanien", "Österreich"], "a": 3}, {"n": 227, "q": "Welches Land ist ein Nachbarland von Deutschland?", "o": ["Finnland", "Dänemark", "Norwegen", "Schweden"], "a": 1}, {"n": 229, "q": "Welches Land ist ein Nachbarland von Deutschland?", "o": ["Spanien", "Bulgarien", "Norwegen", "Luxemburg"], "a": 3}, {"n": 233, "q": "Welches Land ist ein Nachbarland von Deutschland?", "o": ["Tschechien", "Bulgarien", "Griechenland", "Portugal"], "a": 0}, {"n": 241, "q": "Frau Seger bekommt ein Kind. Was muss sie tun, um Elterngeld zu erhalten?", "o": ["Sie muss an ihre Krankenkasse schreiben.", "Sie muss einen Antrag bei der Elterngeldstelle stellen.", "Sie muss nichts tun, denn sie bekommt automatisch Elterngeld.", "Sie muss das Arbeitsamt um Erlaubnis bitten."], "a": 1}, {"n": 243, "q": "Maik und Sybille wollen mit Freunden an ihrem deutschen Wohnort eine Demonstration auf der Straße abhalten. Was müssen sie vorher tun?", "o": ["Sie müssen die Demonstration anmelden.", "Sie müssen nichts tun. Man darf in Deutschland jederzeit überall demonstrieren.", "Sie können gar nichts tun, denn Demonstrationen sind in Deutschland grundsätzlich verboten.", "Maik und Sybille müssen einen neuen Verein gründen, weil nur Vereine demonstrieren dürfen."], "a": 0}, {"n": 246, "q": "Ab welchem Alter ist man in Deutschland volljährig?", "o": ["16", "18", "19", "21"], "a": 1}, {"n": 247, "q": "Eine Frau ist schwanger. Sie ist kurz vor und nach der Geburt ihres Kindes vom Gesetz besonders beschützt. Wie heißt dieser Schutz?", "o": ["Elternzeit", "Mutterschutz", "Geburtsvorbereitung", "Wochenbett"], "a": 1}, {"n": 253, "q": "Wo müssen Sie sich anmelden, wenn Sie in Deutschland umziehen?", "o": ["beim Einwohnermeldeamt", "beim Standesamt", "beim Ordnungsamt", "beim Gewerbeamt"], "a": 0}, {"n": 256, "q": "Ein Ehepaar möchte in Deutschland ein Restaurant eröffnen. Was braucht es dazu unbedingt?", "o": ["eine Erlaubnis der Polizei", "eine Genehmigung einer Partei", "eine Genehmigung des Einwohnermeldeamts", "eine Gaststättenerlaubnis von der zuständigen Behörde"], "a": 3}, {"n": 262, "q": "Was bedeutet in Deutschland der Grundsatz der Gleichbehandlung?", "o": ["Niemand darf z.B. wegen einer Behinderung benachteiligt werden.", "Man darf andere Personen benachteiligen, wenn ausreichende persönliche Gründe hierfür vorliegen.", "Niemand darf gegen Personen klagen, wenn sie benachteiligt wurden.", "Es ist für alle Gesetz, benachteiligten Gruppen jährlich Geld zu spenden."], "a": 0}, {"n": 263, "q": "In Deutschland sind Jugendliche ab 14 Jahren strafmündig. Das bedeutet: Jugendliche, die 14 Jahre und älter sind und gegen Strafgesetze verstoßen, …", "o": ["werden bestraft.", "werden wie Erwachsene behandelt.", "teilen die Strafe mit ihren Eltern.", "werden nicht bestraft."], "a": 0}, {"n": 265, "q": "Wohin muss man in Deutschland zuerst gehen, wenn man heiraten möchte?", "o": ["zum Einwohnermeldeamt", "zum Ordnungsamt", "zur Agentur für Arbeit", "zum Standesamt"], "a": 3}, {"n": 267, "q": "Eine junge Frau in Deutschland, 22 Jahre alt, lebt mit ihrem Freund zusammen. Die Eltern der Frau finden das nicht gut, weil ihnen der Freund nicht gefällt. Was können die Eltern tun?", "o": ["Sie müssen die Entscheidung der volljährigen Tochter respektieren.", "Sie haben das Recht, die Tochter in die elterliche Wohnung zurückzuholen.", "Sie können zur Polizei gehen und die Tochter anzeigen.", "Sie suchen einen anderen Mann für die Tochter."], "a": 0}, {"n": 268, "q": "Eine junge Frau will den Führerschein machen. Sie hat Angst vor der Prüfung, weil ihre Muttersprache nicht Deutsch ist. Was ist richtig?", "o": ["Sie muss mindestens zehn Jahre in Deutschland leben, bevor sie den Führerschein machen kann.", "Wenn sie kein Deutsch kann, darf sie keinen Führerschein haben.", "Sie muss den Führerschein in dem Land machen, in dem man ihre Sprache spricht.", "Sie kann die Theorie-Prüfung vielleicht in ihrer Muttersprache machen. Es gibt mehr als zehn Sprachen zur Auswahl."], "a": 3}, {"n": 274, "q": "Sie haben in Deutschland absichtlich einen Brief geöffnet, der an eine andere Person adressiert ist. Was haben Sie nicht beachtet?", "o": ["das Schweigerecht", "das Briefgeheimnis", "die Schweigepflicht", "die Meinungsfreiheit"], "a": 1}, {"n": 276, "q": "Was sollten Sie tun, wenn Sie von Ihrer Ansprechpartnerin/Ihrem Ansprechpartner in einer deutschen Behörde schlecht behandelt werden?", "o": ["Ich kann nichts tun.", "Ich muss mir diese Behandlung gefallen lassen.", "Ich drohe der Person.", "Ich kann mich bei der Behördenleiterin/beim Behördenleiter beschweren."], "a": 3}, {"n": 277, "q": "Eine Frau, die ein zweijähriges Kind hat, bewirbt sich in Deutschland um eine Stelle. Was ist ein Beispiel für Diskriminierung? Sie bekommt die Stelle nur deshalb nicht, weil sie …", "o": ["kein Englisch spricht.", "zu hohe Gehaltsvorstellungen hat.", "keine Erfahrungen in diesem Beruf hat.", "Mutter ist."], "a": 3}, {"n": 278, "q": "Ein Mann im Rollstuhl hat sich auf eine Stelle als Buchhalter beworben. Was ist ein Beispiel für Diskriminierung? Er bekommt die Stelle nur deshalb nicht, weil er …", "o": ["im Rollstuhl sitzt.", "keine Erfahrung hat.", "zu hohe Gehaltsvorstellungen hat.", "kein Englisch spricht."], "a": 0}, {"n": 280, "q": "Wenn Sie sich in Deutschland gegen einen falschen Steuerbescheid wehren wollen, müssen Sie …", "o": ["nichts machen.", "den Bescheid wegwerfen.", "Einspruch einlegen.", "warten, bis ein anderer Bescheid kommt."], "a": 2}, {"n": 281, "q": "Zwei Freunde wollen in ein öffentliches Schwimmbad in Deutschland. Beide haben eine dunkle Hautfarbe und werden deshalb nicht hineingelassen. Welches Recht wird in dieser Situation verletzt? Das Recht auf …", "o": ["Meinungsfreiheit", "Gleichbehandlung", "Versammlungsfreiheit", "Freizügigkeit"], "a": 1}, {"n": 282, "q": "Welches Ehrenamt müssen deutsche Staatsbürgerinnen und Staatsbürger übernehmen, wenn sie dazu aufgefordert werden?", "o": ["Vereinstrainerin/Vereinstrainer", "Wahlhelferin/Wahlhelfer", "Bibliotheksaufsicht", "Lehrerin/Lehrer"], "a": 1}, {"n": 283, "q": "Was tun Sie, wenn Sie eine falsche Rechnung von einer deutschen Behörde bekommen?", "o": ["Ich lasse die Rechnung liegen.", "Ich lege Widerspruch bei der Behörde ein.", "Ich schicke die Rechnung an die Behörde zurück.", "Ich gehe mit der Rechnung zum Finanzamt."], "a": 1}, {"n": 285, "q": "Frau Frost arbeitet als fest angestellte Mitarbeiterin in einem Büro. Was muss sie nicht von ihrem Gehalt bezahlen?", "o": ["Lohnsteuer", "Beiträge zur Arbeitslosenversicherung", "Beiträge zur Renten- und Krankenversicherung", "Umsatzsteuer"], "a": 3}, {"n": 286, "q": "Welche Organisation in einer Firma hilft den Arbeitnehmerinnen und Arbeitnehmern bei Problemen mit der Arbeitgeberin/dem Arbeitgeber?", "o": ["der Betriebsrat", "die Betriebsprüferin/der Betriebsprüfer", "die Betriebsgruppe", "das Betriebsmanagement"], "a": 0}, {"n": 287, "q": "Sie möchten bei einer Firma in Deutschland ihr Arbeitsverhältnis beenden. Was müssen Sie beachten?", "o": ["die Gehaltszahlungen", "die Arbeitszeit", "die Kündigungsfrist", "die Versicherungspflicht"], "a": 2}, {"n": 288, "q": "Woraus begründet sich Deutschlands besondere Verantwortung für Israel?", "o": ["aus der Mitgliedschaft in der Europäischen Union (EU)", "aus den nationalsozialistischen Verbrechen gegen Juden", "aus dem Grundgesetz der Bundesrepublik Deutschland", "aus der christlichen Tradition"], "a": 1}, {"n": 289, "q": "Ein Mann mit dunkler Hautfarbe bewirbt sich um eine Stelle als Kellner in einem Restaurant in Deutschland. Was ist ein Beispiel für Diskriminierung? Er bekommt die Stelle nur deshalb nicht, weil …", "o": ["seine Deutschkenntnisse zu gering sind.", "er zu hohe Gehaltsvorstellungen hat.", "er eine dunkle Haut hat.", "er keine Erfahrungen im Beruf hat."], "a": 2}, {"n": 290, "q": "Sie haben in Deutschland einen Fernseher gekauft. Zu Hause packen Sie den Fernseher aus, doch er funktioniert nicht. Der Fernseher ist kaputt. Was können Sie machen?", "o": ["eine Anzeige schreiben", "den Fernseher reklamieren", "das Gerät ungefragt austauschen", "die Garantie verlängern"], "a": 1}];
+// Fragen mit fast gleichem Inhalt: pro Runde höchstens eine davon
+const GRUPPEN = [[6, 11], [81, 83], [52, 61], [32, 54], [105, 106], [107, 109, 110], [142, 143, 144, 145, 147], [5, 119], [115, 116], [121, 123], [101, 135], [136, 137], [222, 223, 227, 229, 233], [277, 278, 289], [3, 53], [27, 38, 26], [49, 67], [13, 88], [280, 283], [253, 265], [13, 88]];
+const STAND = new Set([72, 73, 75]);
+const LETTER = ['A', 'B', 'C', 'D'];
+const $ = id => document.getElementById(id);
+
+const grp = new Map();
+GRUPPEN.forEach((g, i) => g.forEach(n => grp.set(n, i)));
+
+const cfg = { anzahl: 10, zufall: true };
+let runde = null;
+
+function shuffle(a) {
+  const b = a.slice();
+  for (let i = b.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [b[i], b[j]] = [b[j], b[i]];
+  }
+  return b;
+}
+
+function chips(containerId, items, getActive, onPick) {
+  const c = $(containerId);
+  c.textContent = '';
+  items.forEach(it => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'chip';
+    b.setAttribute('aria-pressed', String(getActive(it)));
+    b.textContent = it.label;
+    if (it.sub) { const s = document.createElement('small'); s.textContent = ' ' + it.sub; b.appendChild(s); }
+    b.addEventListener('click', () => { onPick(it); drawChips(); });
+    c.appendChild(b);
+  });
+}
+function drawChips() {
+  chips('chips-anzahl', [
+    { label: '10', v: 10 }, { label: '20', v: 20 },
+    { label: '33', v: 33, sub: 'wie in der Prüfung' },
+    { label: 'Alle', v: Q.length, sub: '(' + Q.length + ')' }
+  ], it => cfg.anzahl === it.v, it => { cfg.anzahl = it.v; });
+  chips('chips-reihenfolge', [
+    { label: 'Zufällig', v: true }, { label: 'Nach Nummer', v: false }
+  ], it => cfg.zufall === it.v, it => { cfg.zufall = it.v; });
+}
+
+function ziehen(pool, n, zufall) {
+  let list;
+  if (n >= pool.length) {
+    list = pool.slice();
+  } else {
+    list = [];
+    const used = new Set();
+    for (const q of shuffle(pool)) {
+      const g = grp.get(q.n);
+      if (g !== undefined && used.has(g)) continue;
+      if (g !== undefined) used.add(g);
+      list.push(q);
+      if (list.length === n) break;
+    }
+  }
+  return zufall ? shuffle(list) : list.sort((a, b) => a.n - b.n);
+}
+
+function zeige(id) {
+  ['start', 'runde', 'ende'].forEach(s => { $(s).hidden = s !== id; });
+  window.scrollTo(0, 0);
+}
+
+function startRunde(fragen) {
+  runde = { fragen, i: 0, richtig: 0, streak: 0, falsch: [], beantwortet: false };
+  zeige('runde');
+  frageAnzeigen();
+}
+
+function frageAnzeigen() {
+  const q = runde.fragen[runde.i];
+  runde.beantwortet = false;
+  const order = shuffle([0, 1, 2, 3]);
+  runde.order = order;
+  $('zaehler').textContent = 'Frage ' + (runde.i + 1) + ' von ' + runde.fragen.length;
+  const pct = Math.round(runde.i / runde.fragen.length * 100);
+  $('bar-fill').style.width = pct + '%';
+  $('bar').setAttribute('aria-valuenow', String(pct));
+  $('streak').textContent = '🔥 ' + runde.streak;
+  $('punkte').textContent = '⭐ ' + runde.richtig;
+  const tags = $('tags');
+  tags.textContent = '';
+  const t1 = document.createElement('span'); t1.className = 'tag'; t1.textContent = 'Nr. ' + q.n; tags.appendChild(t1);
+  if (STAND.has(q.n)) { const t2 = document.createElement('span'); t2.className = 'tag stand'; t2.textContent = 'Stand Mai 2025'; tags.appendChild(t2); }
+  $('frage').textContent = q.q;
+  const box = $('antworten');
+  box.textContent = '';
+  order.forEach((orig, pos) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'ans';
+    b.dataset.orig = String(orig);
+    const l = document.createElement('span'); l.className = 'let'; l.textContent = LETTER[pos];
+    const t = document.createElement('span'); t.className = 'txt'; t.textContent = q.o[orig];
+    const m = document.createElement('span'); m.className = 'mark'; m.setAttribute('aria-hidden', 'true');
+    b.append(l, t, m);
+    b.addEventListener('click', () => antworten(orig));
+    box.appendChild(b);
+  });
+  $('fb').textContent = '';
+  $('weiter').hidden = true;
+  $('weiter').textContent = runde.i === runde.fragen.length - 1 ? 'Ergebnis →' : 'Weiter →';
+}
+
+const LOB = ['🎉 Richtig!', '💪 Genau!', '🌟 Stark!', '👏 Sehr gut!', '😎 Sitzt!'];
+
+function antworten(orig) {
+  if (runde.beantwortet) return;
+  runde.beantwortet = true;
+  const q = runde.fragen[runde.i];
+  const ok = orig === q.a;
+  document.querySelectorAll('.ans').forEach(b => {
+    const o = Number(b.dataset.orig);
+    b.disabled = true;
+    const mark = b.querySelector('.mark');
+    if (o === orig) {
+      b.classList.add(ok ? 'richtig' : 'falsch');
+      mark.textContent = ok ? '✅' : '❌';
+    } else if (o === q.a) {
+      b.classList.add('zeige');
+      mark.textContent = '✅';
+    } else {
+      b.classList.add('aus');
+    }
+  });
+  if (ok) { runde.richtig++; runde.streak++; } else { runde.streak = 0; runde.falsch.push(q); }
+  $('streak').textContent = '🔥 ' + runde.streak;
+  $('punkte').textContent = '⭐ ' + runde.richtig;
+  const s = document.createElement('div');
+  s.className = 'sprech ' + (ok ? 'ok' : 'nein');
+  s.textContent = ok ? LOB[Math.floor(Math.random() * LOB.length)] : '🤔 Nicht ganz.';
+  $('fb').textContent = '';
+  $('fb').appendChild(s);
+  $('weiter').hidden = false;
+  $('weiter').focus({ preventScroll: true });
+}
+
+function weiter() {
+  if (!runde.beantwortet) return;
+  if (runde.i < runde.fragen.length - 1) { runde.i++; frageAnzeigen(); }
+  else ergebnis();
+}
+
+function ergebnis() {
+  const n = runde.fragen.length, r = runde.richtig, p = r / n;
+  let emoji, titel;
+  if (p >= 0.9) { emoji = '🏆'; titel = 'Hervorragend!'; }
+  else if (p >= 0.7) { emoji = '🎉'; titel = 'Gut gemacht!'; }
+  else if (p >= 0.5) { emoji = '💪'; titel = 'Schon ganz gut.'; }
+  else { emoji = '🌱'; titel = 'Weiter üben!'; }
+  $('e-emoji').textContent = emoji;
+  $('e-titel').textContent = titel;
+  $('e-zahl').textContent = r + ' von ' + n + ' richtig';
+  const f = runde.falsch;
+  $('wiederholen').hidden = f.length === 0;
+  $('wiederholen').textContent = 'Falsche Fragen wiederholen (' + f.length + ')';
+  $('review-wrap').hidden = f.length === 0;
+  const rv = $('review');
+  rv.textContent = '';
+  f.forEach(q => {
+    const d = document.createElement('div'); d.className = 'review-item';
+    const t = document.createElement('span'); t.className = 'tag'; t.style.alignSelf = 'flex-start'; t.textContent = 'Nr. ' + q.n;
+    const fr = document.createElement('div'); fr.style.fontWeight = '800'; fr.textContent = q.q;
+    const a = document.createElement('div'); a.className = 'richtig-box'; a.textContent = '✅ ' + q.o[q.a];
+    d.append(t, fr, a);
+    rv.appendChild(d);
+  });
+  zeige('ende');
+}
+
+function lsgTabelle() {
+  const body = $('lsg-body');
+  Q.slice().sort((a, b) => a.n - b.n).forEach(q => {
+    const tr = document.createElement('tr');
+    const a = document.createElement('td'); a.className = 'nr'; a.textContent = q.n;
+    const b = document.createElement('td'); b.textContent = q.q;
+    const c = document.createElement('td'); c.className = 'lsg'; c.textContent = q.o[q.a];
+    tr.append(a, b, c);
+    body.appendChild(tr);
+  });
+}
+
+$('anzahl-text').textContent = Q.length + ' Fragen';
+$('los').addEventListener('click', () => startRunde(ziehen(Q, cfg.anzahl, cfg.zufall)));
+$('weiter').addEventListener('click', weiter);
+$('abbrechen').addEventListener('click', () => zeige('start'));
+$('neu').addEventListener('click', () => zeige('start'));
+$('wiederholen').addEventListener('click', () => startRunde(shuffle(runde.falsch)));
+document.addEventListener('keydown', e => {
+  if ($('runde').hidden || e.ctrlKey || e.metaKey || e.altKey) return;
+  const k = e.key.toLowerCase();
+  const idx = ['a', 'b', 'c', 'd'].indexOf(k) >= 0 ? ['a', 'b', 'c', 'd'].indexOf(k) : ['1', '2', '3', '4'].indexOf(k);
+  if (idx >= 0 && !runde.beantwortet) { antworten(runde.order[idx]); }
+});
+drawChips();
+lsgTabelle();
+</script>
+
+</body></html>
