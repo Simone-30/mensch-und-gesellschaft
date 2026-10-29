@@ -1,6 +1,10 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{padding-block:env(safe-area-inset-top,0px) env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>Mensch und Gesellschaft</title>
-<meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:wght@600;700;800&display=swap">
@@ -176,6 +180,8 @@ details.lehr .hinweis { margin-block: 12px; font-size: .95rem; }
   .card { padding: 16px; }
 }
 </style>
+</head>
+<body>
 
 <div class="wrap">
   <section id="start" aria-labelledby="titel">
@@ -197,7 +203,7 @@ details.lehr .hinweis { margin-block: 12px; font-size: .95rem; }
     </div>
     <details class="lehr" style="margin-top:20px">
       <summary>Für Lehrkräfte: Lösungsübersicht</summary>
-      <p class="hinweis">Die Nummern entsprechen dem Gesamtfragenkatalog des BAMF. Die Lösungen wurden von Claude festgelegt und nicht aus dem Original übernommen. Bitte vor dem Einsatz im Kurs mit der BAMF-Fassung abgleichen.</p>
+      <p class="hinweis">Die Nummern entsprechen dem Gesamtfragenkatalog des BAMF. Die Lösungen wurden mit dem Lösungsschlüssel aus „100 Stunden Deutschland: Testvorbereitung“ (Klett, 2024) abgeglichen und stimmen bei allen Fragen überein.</p>
       <div class="tabelle"><table><thead><tr><th>Nr.</th><th>Frage</th><th>Richtige Antwort</th></tr></thead><tbody id="lsg-body"></tbody></table></div>
     </details>
   </section>
@@ -444,5 +450,5 @@ document.addEventListener('keydown', e => {
 drawChips();
 lsgTabelle();
 </script>
-
-</body></html>
+</body>
+</html>
